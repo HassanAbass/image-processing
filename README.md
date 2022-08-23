@@ -26,4 +26,5 @@ Available filenames :
 ```
 
 ### Attribution
-- added [jasmine configuration file](https://github.com/bcaudan/jasmine-spec-reporter/tree/master/examples/typescript)  `src/test/helpers/reporter.ts` 
+- added [jasmine reporter configuration](https://github.com/bcaudan/jasmine-spec-reporter/tree/master/examples/typescript)  `src/test/helpers/reporter.ts` 
+- I used udacity jasmine default configuration `spec/support/jasmine.json`
