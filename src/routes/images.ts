@@ -9,9 +9,9 @@ import {
 const router = express.Router();
 
 router.get("/images", async (req, res): Promise<void> => {
-    let width: number = parseInt(req.query.width as string);
-    let height: number = parseInt(req.query.height as string);
-    let fileName: string = req.query.fileName as string;
+    const width: number = parseInt(req.query.width as string);
+    const height: number = parseInt(req.query.height as string);
+    const fileName: string = req.query.fileName as string;
     try {
         if (!fileName) throw "Provide image name, 'fileName' key is requried.";
         if (!width || !height) throw "Provide image width and height.";

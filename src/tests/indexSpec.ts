@@ -1,5 +1,11 @@
 import supertest from "supertest";
 import app from "../index";
+import {
+    fileExists,
+    resizedName,
+    thumbPath,
+    writeThumbFile,
+} from "../libs/file";
 
 const request = supertest(app);
 
@@ -16,5 +22,12 @@ describe("Test App functionality", () => {
             "/api/images?fileName=noImage.jpg&width=300&height=300"
         );
         expect(response.status).toBe(422);
+    });
+
+    it("test image processing function", async () => {
+        await writeThumbFile("santamonica.jpg", 500, 400);
+        expect(
+            fileExists(thumbPath(resizedName("santamonica.jpg", 500, 400)))
+        ).toEqual(true);
     });
 });
