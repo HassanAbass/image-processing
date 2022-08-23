@@ -24,3 +24,6 @@ Available filenames :
 ```
 {SERVER_URL}/api/images?fileName=palmtunnel.jpg&width=1000&height=600
 ```
+
+### Attribution
+- added [jasmine configuration file](https://github.com/bcaudan/jasmine-spec-reporter/tree/master/examples/typescript)  `src/test/helpers/reporter.ts` 
