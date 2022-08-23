@@ -1,4 +1,5 @@
 ## Image Processing project
+*NOTICE: This project uses node v14.17.2*
 
 Installing packages
 ```
