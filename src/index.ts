@@ -6,7 +6,7 @@ const port = 3000;
 app.use("/api", imagesRoutes);
 
 app.listen(port, () => {
-    //   console.log("starting server at " + port);
+    console.log("starting server at " + port);
 });
 
 export default app;

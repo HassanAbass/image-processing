@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import app from "../index";
-import { VALIDATION_CODE } from "../libs/constants";
+import { SUCCESS_CODE, VALIDATION_CODE } from "../libs/constants";
 import {
     fileExists,
     resizedName,
@@ -15,7 +15,7 @@ describe("Test App functionality", () => {
         const response = await request.get(
             "/api/images?fileName=fjord.jpg&width=300&height=300"
         );
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(SUCCESS_CODE);
     });
 
     it("fail on image, width, height not provided", async () => {
