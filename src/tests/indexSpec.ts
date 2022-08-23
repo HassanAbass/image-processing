@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import app from "../index";
+import { VALIDATION_CODE } from "../libs/constants";
 import {
     fileExists,
     resizedName,
@@ -21,7 +22,7 @@ describe("Test App functionality", () => {
         const response = await request.get(
             "/api/images?fileName=noImage.jpg&width=300&height=300"
         );
-        expect(response.status).toBe(422);
+        expect(response.status).toBe(VALIDATION_CODE);
     });
 
     it("test image processing function", async () => {

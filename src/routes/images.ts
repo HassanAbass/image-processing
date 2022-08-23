@@ -1,31 +1,32 @@
 import express from "express";
+import { VALIDATION_CODE } from "../libs/constants";
 import {
     fileExists,
-    imagePath,
     resizedName,
     thumbPath,
     writeThumbFile,
 } from "../libs/file";
+import notFound from "./validation";
 const router = express.Router();
 
-router.get("/images", async (req, res): Promise<void> => {
-    const width: number = parseInt(req.query.width as string);
-    const height: number = parseInt(req.query.height as string);
-    const fileName: string = req.query.fileName as string;
-    try {
-        if (!fileName) throw "Provide image name, 'fileName' key is requried.";
-        if (!width || !height) throw "Provide image width and height.";
-        if (!fileExists(imagePath(fileName))) throw "File not found.";
-        if (fileExists(thumbPath(resizedName(fileName, width, height))))
-            return res.sendFile(
-                thumbPath(resizedName(fileName, width, height))
-            );
-
-        await writeThumbFile(fileName, width, height);
-        res.sendFile(thumbPath(resizedName(fileName, width, height)));
-    } catch (e) {
-        res.status(422).send(e);
+router.get(
+    "/images",
+    notFound,
+    async (req: express.Request, res: express.Response): Promise<void> => {
+        const width: number = parseInt(req.query.width as string);
+        const height: number = parseInt(req.query.height as string);
+        const fileName: string = req.query.fileName as string;
+        try {
+            if (fileExists(thumbPath(resizedName(fileName, width, height))))
+                return res.sendFile(
+                    thumbPath(resizedName(fileName, width, height))
+                );
+            await writeThumbFile(fileName, width, height);
+            res.sendFile(thumbPath(resizedName(fileName, width, height)));
+        } catch (e) {
+            res.status(VALIDATION_CODE).send(e);
+        }
     }
-});
+);
 
 export default router;
