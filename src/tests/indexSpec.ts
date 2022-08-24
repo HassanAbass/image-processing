@@ -7,6 +7,7 @@ import {
     thumbPath,
     writeThumbFile,
 } from "../libs/file";
+import { isPosNumber } from "../routes/validation";
 
 const request = supertest(app);
 
@@ -30,5 +31,13 @@ describe("Test App functionality", () => {
         expect(
             fileExists(thumbPath(resizedName("santamonica.jpg", 500, 400)))
         ).toEqual(true);
+    });
+
+    it("validate number is positive, non zero", async () => {
+        expect(isPosNumber("-1")).toEqual(false);
+        expect(isPosNumber("0")).toEqual(false);
+        expect(isPosNumber("100a")).toEqual(false);
+        expect(isPosNumber("00")).toEqual(false);
+        expect(isPosNumber("100")).toEqual(true);
     });
 });

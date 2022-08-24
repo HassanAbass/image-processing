@@ -12,7 +12,7 @@ const router = express.Router();
 router.get(
     "/images",
     notFound,
-    async (req: express.Request, res: express.Response) => {
+    async (req: express.Request, res: express.Response): Promise<void> => {
         const width: number = parseInt(req.query.width as string);
         const height: number = parseInt(req.query.height as string);
         const fileName: string = req.query.fileName as string;
@@ -26,7 +26,7 @@ router.get(
                 .status(SUCCESS_CODE)
                 .sendFile(thumbPath(resizedName(fileName, width, height)));
         } catch (e) {
-            return res.status(VALIDATION_CODE).send(e);
+            res.status(VALIDATION_CODE).send(e);
         }
     }
 );
